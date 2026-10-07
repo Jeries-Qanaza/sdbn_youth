@@ -1,1 +1,581 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don Bosco Youth</title>
+    <link rel="icon" href="logo.png" type="image/png">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Cairo & Readex Pro -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-blue: #0259e6;
+            --dark-blue: #003db3;
+            --light-blue-bg: #eaf2ff;
+            --salesian-red: #d92323;
+            --navy-text: #0b224d;
+        }
+
+        body {
+            font-family: 'Cairo', 'Readex Pro', sans-serif;
+            background: linear-gradient(135deg, #f0f5ff 0%, #e3eeff 50%, #f7faff 100%);
+            min-height: 100vh;
+            color: var(--navy-text);
+        }
+
+        .form-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px -10px rgba(2, 89, 230, 0.12);
+            border: 1px solid rgba(2, 89, 230, 0.1);
+        }
+
+        .input-field {
+            transition: all 0.25s ease-in-out;
+            border: 2px solid #e2e8f0;
+        }
+
+        .input-field:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(2, 89, 230, 0.15);
+            outline: none;
+            background-color: #ffffff;
+        }
+
+        .btn-salesian {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 20px -4px rgba(2, 89, 230, 0.35);
+        }
+
+        .btn-salesian:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px -4px rgba(2, 89, 230, 0.45);
+        }
+
+        .btn-salesian:active {
+            transform: translateY(1px);
+        }
+
+        .wheel-container {
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .wheel-column {
+            height: 180px;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .wheel-column::-webkit-scrollbar {
+            display: none;
+        }
+
+        .wheel-item {
+            height: 40px;
+            scroll-snap-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .wheel-highlight-bar {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 42px;
+            transform: translateY(-50%);
+            border-top: 2px solid rgba(2, 89, 230, 0.25);
+            border-bottom: 2px solid rgba(2, 89, 230, 0.25);
+            background-color: rgba(2, 89, 230, 0.06);
+            pointer-events: none;
+            border-radius: 10px;
+        }
+
+        .wheel-mask {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(
+                to bottom,
+                rgba(255, 255, 255, 0.95) 0%,
+                rgba(255, 255, 255, 0.2) 35%,
+                rgba(255, 255, 255, 0.2) 65%,
+                rgba(255, 255, 255, 0.95) 100%
+            );
+        }
+
+        .modal-enter {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="py-4 sm:py-8 px-3 sm:px-4 flex items-center justify-center min-h-screen">
+
+    <div class="w-full max-w-xl mx-auto">
+        <main class="form-card p-4 sm:p-10 relative overflow-hidden">
+            <!-- Top Branding Header -->
+            <div class="flex items-center justify-between pb-5 sm:pb-6 mb-5 sm:mb-6 border-b border-gray-100">
+                <div class="flex items-center gap-2.5 sm:gap-3.5">
+                    <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-white border border-gray-100 flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden p-1">
+                        <!-- Salesiani Don Bosco Logo -->
+                        <img src="logo.png" alt="Don Bosco Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/d92323/ffffff?text=DB';">
+                    </div>
+                    <div>
+                        <span class="text-[10px] sm:text-[11px] font-extrabold tracking-wider text-[#d92323] uppercase block">SALESIANI DON BOSCO</span>
+                        <h1 class="text-base sm:text-xl font-extrabold text-[#0259e6]">شبيبة يسوع الشاب - الناصرة</h1>
+                    </div>
+                </div>
+                
+                <div class="flex items-center gap-2">
+                    <span class="text-[11px] sm:text-xs bg-blue-50 text-[#0259e6] font-bold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-blue-100">
+                        استمارة تسجيل
+                    </span>
+                </div>
+            </div>
+
+            <form id="registrationForm" class="space-y-4 sm:space-y-5" novalidate>
+                
+                <!-- First Name & Last Name (Side by Side on All Devices) -->
+                <div class="grid grid-cols-2 gap-3 sm:gap-5">
+                    <!-- First Name -->
+                    <div>
+                        <label for="firstName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-1.5">
+                            الاسم الأول <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-2.5 sm:pr-3.5 pointer-events-none text-gray-400 text-xs sm:text-sm">
+                                <i class="fa-solid fa-user"></i>
+                            </span>
+                            <input 
+                                type="text" 
+                                id="firstName" 
+                                name="firstName" 
+                                required
+                                class="input-field w-full pr-8 sm:pr-10 pl-2.5 sm:pl-4 py-2.5 sm:py-3 rounded-xl bg-gray-50 text-gray-800 text-xs sm:text-sm font-medium"
+                            >
+                        </div>
+                        <p class="text-[11px] sm:text-xs text-red-500 mt-1 hidden" id="firstNameError">يرجى إدخال الاسم الأول</p>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div>
+                        <label for="lastName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-1.5">
+                            اسم العائلة <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-2.5 sm:pr-3.5 pointer-events-none text-gray-400 text-xs sm:text-sm">
+                                <i class="fa-solid fa-users"></i>
+                            </span>
+                            <input 
+                                type="text" 
+                                id="lastName" 
+                                name="lastName" 
+                                required
+                                class="input-field w-full pr-8 sm:pr-10 pl-2.5 sm:pl-4 py-2.5 sm:py-3 rounded-xl bg-gray-50 text-gray-800 text-xs sm:text-sm font-medium"
+                            >
+                        </div>
+                        <p class="text-[11px] sm:text-xs text-red-500 mt-1 hidden" id="lastNameError">يرجى إدخال اسم العائلة</p>
+                    </div>
+                </div>
+
+                <!-- Phone & Birthday (Side by Side on All Devices) -->
+                <div class="grid grid-cols-2 gap-3 sm:gap-5">
+                    <!-- Phone Number -->
+                    <div>
+                        <label for="phone" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-1.5">
+                            رقم الهاتف <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-2.5 sm:pr-3.5 pointer-events-none text-gray-400 text-xs sm:text-sm">
+                                <i class="fa-solid fa-phone"></i>
+                            </span>
+                            <input 
+                                type="tel" 
+                                id="phone" 
+                                name="phone" 
+                                required
+                                dir="ltr"
+                                inputmode="numeric"
+                                pattern="[0-9]*"
+                                class="input-field w-full pr-8 sm:pr-10 pl-2.5 sm:pl-4 py-2.5 sm:py-3 rounded-xl bg-gray-50 text-gray-800 text-xs sm:text-sm font-medium text-right"
+                            >
+                        </div>
+                        <p class="text-[11px] sm:text-xs text-red-500 mt-1 hidden" id="phoneError">رقم هاتف غير صحيح</p>
+                    </div>
+
+                    <!-- Birthday DD/MM/YYYY -->
+                    <div>
+                        <label for="birthday" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-1.5 truncate">
+                            تاريخ الميلاد <span class="text-red-500">*</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-2.5 sm:pr-3.5 pointer-events-none text-gray-400 text-xs sm:text-sm">
+                                <i class="fa-solid fa-cake-candles"></i>
+                            </span>
+                            <input 
+                                type="text" 
+                                id="birthday" 
+                                name="birthday" 
+                                required
+                                readonly
+                                value="31/01/2000"
+                                class="input-field w-full pr-8 sm:pr-10 pl-2.5 sm:pl-4 py-2.5 sm:py-3 rounded-xl bg-gray-50 text-gray-800 text-xs sm:text-sm font-medium cursor-pointer text-center select-none"
+                            >
+                        </div>
+                        <p class="text-[11px] sm:text-xs text-red-500 mt-1 hidden" id="birthdayError">يرجى اختيار تاريخ الميلاد</p>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="notes" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-1.5">
+                        ملاحظات <span class="text-xs font-normal text-gray-400">(اختياري)</span>
+                    </label>
+                    <div class="relative">
+                        <span class="absolute top-3.5 right-3.5 pointer-events-none text-gray-400 text-xs sm:text-sm">
+                            <i class="fa-solid fa-comment-dots"></i>
+                        </span>
+                        <textarea 
+                            id="notes" 
+                            name="notes" 
+                            rows="3" 
+                            class="input-field w-full pr-8 sm:pr-10 pl-2.5 sm:pl-4 py-2.5 sm:py-3 rounded-xl bg-gray-50 text-gray-800 text-xs sm:text-sm font-medium resize-none"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-2 sm:pt-3">
+                    <button 
+                        type="submit" 
+                        id="submitBtn"
+                        class="btn-salesian w-full py-3 sm:py-3.5 px-6 rounded-xl text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                        <span>إرسال</span>
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </div>
+
+            </form>
+        </main>
+    </div>
+
+    <div id="successModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center form-card modal-enter">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="text-xl font-extrabold text-gray-800 mb-2">تم إرسال البيانات بنجاح!</h3>
+            <p class="text-xs text-gray-600 mb-6">شكراً لتسجيلك، تم حفظ بياناتك بنجاح.</p>
+
+            <button 
+                id="closeSuccessBtn"
+                class="btn-salesian w-full py-3 rounded-xl text-white font-bold text-sm"
+            >
+                إغلاق
+            </button>
+        </div>
+    </div>
+
+    <div id="datePickerModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
+        <div class="bg-white rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 max-w-sm w-full form-card modal-enter">
+            <div class="flex items-center justify-between border-b pb-3 mb-4">
+                <span class="text-xs font-bold text-gray-400">تحديد تاريخ الميلاد</span>
+                <span id="selectedDateDisplay" class="text-sm font-extrabold text-[#0259e6]" dir="ltr">31 / 01 / 2000</span>
+            </div>
+
+            <!-- Column Titles (Day on Left, Month in Middle, Year on Right) -->
+            <div class="grid grid-cols-3 text-center text-xs font-extrabold text-gray-500 mb-2" dir="ltr">
+                <div>اليوم (DD)</div>
+                <div>الشهر (MM)</div>
+                <div>السنة (YYYY)</div>
+            </div>
+
+            <!-- Wheel Picker Container -->
+            <div class="wheel-container h-[180px] my-2">
+                <div class="wheel-highlight-bar"></div>
+                <div class="grid grid-cols-3 gap-1 h-full relative z-10" dir="ltr">
+                    <!-- Day Column (DD) - Left -->
+                    <div class="wheel-column" id="dayWheel"></div>
+                    <!-- Month Column (MM) - Middle -->
+                    <div class="wheel-column" id="monthWheel"></div>
+                    <!-- Year Column (YYYY) - Right -->
+                    <div class="wheel-column" id="yearWheel"></div>
+                </div>
+                <div class="wheel-mask"></div>
+            </div>
+
+            <div class="flex items-center gap-3 mt-5">
+                <button 
+                    type="button" 
+                    id="confirmDateBtn"
+                    class="btn-salesian flex-1 py-2.5 sm:py-3 rounded-xl text-white font-bold text-sm"
+                >
+                    تأكيد
+                </button>
+                <button 
+                    type="button" 
+                    id="cancelDateBtn"
+                    class="flex-1 py-2.5 sm:py-3 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm"
+                >
+                    إلغاء
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwLHbi6POBPB9YI3WSJ9RqbH4lSaJFhIvFDCReOK6U6JKUDVhYoBaIMCB3fxH9R3B8i/exec";
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('registrationForm');
+            const firstNameInput = document.getElementById('firstName');
+            const lastNameInput = document.getElementById('lastName');
+            const phoneInput = document.getElementById('phone');
+            const birthdayInput = document.getElementById('birthday');
+            const notesInput = document.getElementById('notes');
+            const submitBtn = document.getElementById('submitBtn');
+            const successModal = document.getElementById('successModal');
+            const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+
+            // Date Picker Modal Elements
+            const datePickerModal = document.getElementById('datePickerModal');
+            const dayWheel = document.getElementById('dayWheel');
+            const monthWheel = document.getElementById('monthWheel');
+            const yearWheel = document.getElementById('yearWheel');
+            const selectedDateDisplay = document.getElementById('selectedDateDisplay');
+            const confirmDateBtn = document.getElementById('confirmDateBtn');
+            const cancelDateBtn = document.getElementById('cancelDateBtn');
+
+            let currentDay = 31;
+            let currentMonth = 1;
+            let currentYear = 2000;
+
+            function populateWheel(element, start, end, formatTwoDigits = true) {
+                element.innerHTML = '';
+                
+                // Add top padding items
+                for (let i = 0; i < 2; i++) {
+                    const pad = document.createElement('div');
+                    pad.className = 'wheel-item opacity-0 pointer-events-none';
+                    element.appendChild(pad);
+                }
+
+                for (let i = start; i <= end; i++) {
+                    const item = document.createElement('div');
+                    item.className = 'wheel-item text-gray-700 text-sm cursor-pointer';
+                    const val = formatTwoDigits ? String(i).padStart(2, '0') : String(i);
+                    item.textContent = val;
+                    item.dataset.value = i;
+                    element.appendChild(item);
+                }
+
+                // Add bottom padding items
+                for (let i = 0; i < 2; i++) {
+                    const pad = document.createElement('div');
+                    pad.className = 'wheel-item opacity-0 pointer-events-none';
+                    element.appendChild(pad);
+                }
+            }
+
+            populateWheel(dayWheel, 1, 31, true);
+            populateWheel(monthWheel, 1, 12, true);
+            populateWheel(yearWheel, 1940, 2026, false);
+
+            function scrollToValue(wheel, value) {
+                const items = wheel.querySelectorAll('.wheel-item:not(.pointer-events-none)');
+                items.forEach((item) => {
+                    if (parseInt(item.dataset.value, 10) === parseInt(value, 10)) {
+                        const topPos = item.offsetTop - wheel.offsetTop - (180 / 2) + (40 / 2);
+                        wheel.scrollTo({ top: topPos, behavior: 'smooth' });
+                    }
+                });
+            }
+
+            function setupWheelListener(wheel, onChange) {
+                let scrollTimeout;
+                wheel.addEventListener('scroll', () => {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        const centerPos = wheel.scrollTop + (180 / 2);
+                        const items = wheel.querySelectorAll('.wheel-item:not(.pointer-events-none)');
+                        let closest = null;
+                        let minDistance = Infinity;
+
+                        items.forEach((item) => {
+                            const itemCenter = item.offsetTop - wheel.offsetTop + 20;
+                            const dist = Math.abs(centerPos - itemCenter);
+                            if (dist < minDistance) {
+                                minDistance = dist;
+                                closest = item;
+                            }
+                        });
+
+                        if (closest) {
+                            items.forEach(i => i.classList.remove('text-[#0259e6]', 'scale-110', 'font-black'));
+                            closest.classList.add('text-[#0259e6]', 'scale-110', 'font-black');
+                            onChange(parseInt(closest.dataset.value, 10));
+                            updateDateDisplay();
+                        }
+                    }, 60);
+                });
+            }
+
+            function updateDateDisplay() {
+                const formattedD = String(currentDay).padStart(2, '0');
+                const formattedM = String(currentMonth).padStart(2, '0');
+                selectedDateDisplay.textContent = `${formattedD} / ${formattedM} / ${currentYear}`;
+            }
+
+            setupWheelListener(dayWheel, (val) => { currentDay = val; });
+            setupWheelListener(monthWheel, (val) => { currentMonth = val; });
+            setupWheelListener(yearWheel, (val) => { currentYear = val; });
+
+            // Open date modal on tap/click
+            birthdayInput.addEventListener('click', () => {
+                const parts = birthdayInput.value.split('/');
+                if (parts.length === 3) {
+                    currentDay = parseInt(parts[0], 10) || 31;
+                    currentMonth = parseInt(parts[1], 10) || 1;
+                    currentYear = parseInt(parts[2], 10) || 2000;
+                }
+                
+                datePickerModal.classList.remove('hidden');
+                updateDateDisplay();
+
+                setTimeout(() => {
+                    scrollToValue(dayWheel, currentDay);
+                    scrollToValue(monthWheel, currentMonth);
+                    scrollToValue(yearWheel, currentYear);
+                }, 50);
+            });
+
+            confirmDateBtn.addEventListener('click', () => {
+                const formattedD = String(currentDay).padStart(2, '0');
+                const formattedM = String(currentMonth).padStart(2, '0');
+                birthdayInput.value = `${formattedD}/${formattedM}/${currentYear}`;
+                datePickerModal.classList.add('hidden');
+                validateBirthday();
+            });
+
+            cancelDateBtn.addEventListener('click', () => {
+                datePickerModal.classList.add('hidden');
+            });
+
+            function validateFirstName() {
+                const isValid = firstNameInput.value.trim().length >= 2;
+                toggleError('firstNameError', !isValid);
+                return isValid;
+            }
+
+            function validateLastName() {
+                const isValid = lastNameInput.value.trim().length >= 2;
+                toggleError('lastNameError', !isValid);
+                return isValid;
+            }
+
+            function validatePhone() {
+                const phoneDigits = phoneInput.value.replace(/\D/g, '');
+                const isValid = phoneDigits.length >= 9 && phoneDigits.length <= 12;
+                toggleError('phoneError', !isValid);
+                return isValid;
+            }
+
+            function validateBirthday() {
+                const regex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/(19|20)\d\d$/;
+                const isValid = regex.test(birthdayInput.value.trim());
+                toggleError('birthdayError', !isValid);
+                return isValid;
+            }
+
+            function toggleError(id, show) {
+                const el = document.getElementById(id);
+                if (el) {
+                    if (show) el.classList.remove('hidden');
+                    else el.classList.add('hidden');
+                }
+            }
+
+            firstNameInput.addEventListener('blur', validateFirstName);
+            lastNameInput.addEventListener('blur', validateLastName);
+            phoneInput.addEventListener('blur', validatePhone);
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const isFirstValid = validateFirstName();
+                const isLastValid = validateLastName();
+                const isPhoneValid = validatePhone();
+                const isDateValid = validateBirthday();
+
+                if (!isFirstValid || !isLastValid || !isPhoneValid || !isDateValid) {
+                    return;
+                }
+
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin ml-2"></i> جاري الإرسال...`;
+
+                const formData = {
+                    firstName: firstNameInput.value.trim(),
+                    lastName: lastNameInput.value.trim(),
+                    phone: phoneInput.value.trim(),
+                    birthday: birthdayInput.value.trim(),
+                    notes: notesInput.value.trim() || 'لا يوجد',
+                    submittedAt: new Date().toLocaleString('ar-EG')
+                };
+
+                let submissions = JSON.parse(localStorage.getItem('donbosco_form_submissions') || '[]');
+                submissions.push(formData);
+                localStorage.setItem('donbosco_form_submissions', JSON.stringify(submissions));
+
+                if (GOOGLE_SHEETS_WEB_APP_URL && GOOGLE_SHEETS_WEB_APP_URL.includes('script.google.com')) {
+                    try {
+                        await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+                            method: 'POST',
+                            mode: 'no-cors',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(formData)
+                        });
+                    } catch (err) {
+                        console.log('Submission saved locally:', err);
+                    }
+                }
+
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span>إرسال</span> <i class="fa-solid fa-paper-plane text-xs"></i>`;
+
+                successModal.classList.remove('hidden');
+                form.reset();
+                birthdayInput.value = "31/01/2000";
+            });
+
+            closeSuccessBtn.addEventListener('click', () => {
+                successModal.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
