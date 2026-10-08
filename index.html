@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Don Bosco Youth</title>
     <link rel="icon" href="logo.png" type="image/png">
     
@@ -13,7 +12,7 @@
     <!-- Google Fonts: Cairo & Readex Pro -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,21 +28,22 @@
 
         body {
             font-family: 'Cairo', 'Readex Pro', sans-serif;
-            background: linear-gradient(135deg, #f0f5ff 0%, #e3eeff 50%, #f7faff 100%);
+            background: linear-gradient(135deg, #edf3fe 0%, #e1ecfe 50%, #f4f8ff 100%);
             min-height: 100vh;
             color: var(--navy-text);
+            -webkit-tap-highlight-color: transparent;
         }
 
         .form-card {
             background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 15px 35px -10px rgba(2, 89, 230, 0.12);
-            border: 1px solid rgba(2, 89, 230, 0.1);
+            box-shadow: 0 20px 40px -15px rgba(2, 89, 230, 0.15);
+            border: 1px solid rgba(2, 89, 230, 0.08);
         }
 
         .input-field {
-            transition: all 0.25s ease-in-out;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid #e2e8f0;
+            font-size: 16px !important; /* Prevents iOS auto-zoom */
         }
 
         .input-field:focus {
@@ -56,25 +56,26 @@
         .btn-salesian {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 20px -4px rgba(2, 89, 230, 0.35);
+            box-shadow: 0 10px 22px -6px rgba(2, 89, 230, 0.4);
         }
 
         .btn-salesian:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 25px -4px rgba(2, 89, 230, 0.45);
+            box-shadow: 0 14px 28px -6px rgba(2, 89, 230, 0.5);
         }
 
         .btn-salesian:active {
             transform: translateY(1px);
         }
 
+        /* 3D Wheel Picker styling */
         .wheel-container {
             perspective: 1000px;
             position: relative;
         }
 
         .wheel-column {
-            height: 180px;
+            height: 200px;
             overflow-y: scroll;
             scroll-snap-type: y mandatory;
             scrollbar-width: none;
@@ -86,7 +87,7 @@
         }
 
         .wheel-item {
-            height: 40px;
+            height: 44px;
             scroll-snap-align: center;
             display: flex;
             align-items: center;
@@ -101,13 +102,13 @@
             top: 50%;
             left: 0;
             right: 0;
-            height: 42px;
+            height: 46px;
             transform: translateY(-50%);
-            border-top: 2px solid rgba(2, 89, 230, 0.25);
-            border-bottom: 2px solid rgba(2, 89, 230, 0.25);
-            background-color: rgba(2, 89, 230, 0.06);
+            border-top: 2px solid rgba(2, 89, 230, 0.3);
+            border-bottom: 2px solid rgba(2, 89, 230, 0.3);
+            background-color: rgba(2, 89, 230, 0.08);
             pointer-events: none;
-            border-radius: 10px;
+            border-radius: 12px;
         }
 
         .wheel-mask {
@@ -117,57 +118,58 @@
             background: linear-gradient(
                 to bottom,
                 rgba(255, 255, 255, 0.95) 0%,
-                rgba(255, 255, 255, 0.2) 35%,
-                rgba(255, 255, 255, 0.2) 65%,
+                rgba(255, 255, 255, 0.1) 35%,
+                rgba(255, 255, 255, 0.1) 65%,
                 rgba(255, 255, 255, 0.95) 100%
             );
         }
 
-        .modal-enter {
-            animation: fadeIn 0.3s ease-out forwards;
+        /* View Transition Animations */
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(12px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
     </style>
 </head>
-<body class="py-4 sm:py-8 px-3 sm:px-4 flex items-center justify-center min-h-screen">
+<body class="min-h-screen flex items-center justify-center p-3 sm:p-6 md:p-10">
 
-    <div class="w-full max-w-xl mx-auto">
-        <main class="form-card p-4 sm:p-10 relative overflow-hidden">
-            <!-- Top Branding Header -->
-            <div class="flex items-center justify-between pb-5 sm:pb-6 mb-5 sm:mb-6 border-b border-gray-100">
-                <div class="flex items-center gap-2.5 sm:gap-3.5">
-                    <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-white border border-gray-100 flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden p-1">
-                        <!-- Salesiani Don Bosco Logo -->
-                        <img src="logo.png" alt="Don Bosco Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/d92323/ffffff?text=DB';">
+    <div class="w-full max-w-lg mx-auto">
+        
+        <!-- Registration Form Card View -->
+        <main id="formSection" class="form-card rounded-3xl p-5 sm:p-8 md:p-10 relative overflow-hidden transition-all duration-300">
+            
+            <!-- Branding Header -->
+            <div class="flex items-center justify-between pb-5 mb-6 border-b border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white border border-gray-100 flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden p-1">
+                        <img src="logo.png" alt="Don Bosco Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/120x120/d92323/ffffff?text=DB';">
                     </div>
                     <div>
                         <span class="text-[10px] sm:text-[11px] font-extrabold tracking-wider text-[#d92323] uppercase block">SALESIANI DON BOSCO</span>
-                        <h1 class="text-base sm:text-xl font-extrabold text-[#0259e6]">شبيبة يسوع الشاب - الناصرة</h1>
+                        <h1 class="text-base sm:text-xl font-extrabold text-[#0259e6] leading-tight">شبيبة يسوع الشاب - الناصرة</h1>
                     </div>
                 </div>
                 
-                <div class="flex items-center gap-2">
-                    <span class="text-[11px] sm:text-xs bg-blue-50 text-[#0259e6] font-bold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-blue-100">
-                        استمارة تسجيل
-                    </span>
-                </div>
+                <span class="text-xs bg-blue-50 text-[#0259e6] font-bold px-3 py-1.5 rounded-full border border-blue-100 flex-shrink-0">
+                    استمارة تسجيل
+                </span>
             </div>
 
             <form id="registrationForm" class="space-y-4 sm:space-y-5" novalidate>
                 
-                <!-- First Name & Last Name (Side by Side on All Devices) -->
-                <div class="grid grid-cols-2 gap-3 sm:gap-5">
+                <!-- First Name & Last Name (Side by Side) -->
+                <div class="grid grid-cols-2 gap-3 sm:gap-4">
                     <!-- First Name -->
                     <div>
-                        <label for="firstName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-1.5">
+                        <label for="firstName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5">
                             الاسم الأول <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
-                            <span class="absolute inset-y-0 right-0 flex items-center pr-2.5 sm:pr-3.5 pointer-events-none text-gray-400 text-xs sm:text-sm">
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400 text-sm sm:text-base">
                                 <i class="fa-solid fa-user"></i>
                             </span>
                             <input 
@@ -175,19 +177,19 @@
                                 id="firstName" 
                                 name="firstName" 
                                 required
-                                class="input-field w-full pr-8 sm:pr-10 pl-2.5 sm:pl-4 py-2.5 sm:py-3 rounded-xl bg-gray-50 text-gray-800 text-xs sm:text-sm font-medium"
+                                class="input-field w-full pr-9 pl-3 py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold"
                             >
                         </div>
-                        <p class="text-[11px] sm:text-xs text-red-500 mt-1 hidden" id="firstNameError">يرجى إدخال الاسم الأول</p>
+                        <p class="text-[11px] text-red-500 mt-1 hidden" id="firstNameError">يرجى إدخال الاسم الأول</p>
                     </div>
 
                     <!-- Last Name -->
                     <div>
-                        <label for="lastName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-1.5">
+                        <label for="lastName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5">
                             اسم العائلة <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
-                            <span class="absolute inset-y-0 right-0 flex items-center pr-2.5 sm:pr-3.5 pointer-events-none text-gray-400 text-xs sm:text-sm">
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400 text-sm sm:text-base">
                                 <i class="fa-solid fa-users"></i>
                             </span>
                             <input 
@@ -195,22 +197,22 @@
                                 id="lastName" 
                                 name="lastName" 
                                 required
-                                class="input-field w-full pr-8 sm:pr-10 pl-2.5 sm:pl-4 py-2.5 sm:py-3 rounded-xl bg-gray-50 text-gray-800 text-xs sm:text-sm font-medium"
+                                class="input-field w-full pr-9 pl-3 py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold"
                             >
                         </div>
-                        <p class="text-[11px] sm:text-xs text-red-500 mt-1 hidden" id="lastNameError">يرجى إدخال اسم العائلة</p>
+                        <p class="text-[11px] text-red-500 mt-1 hidden" id="lastNameError">يرجى إدخال اسم العائلة</p>
                     </div>
                 </div>
 
-                <!-- Phone & Birthday (Side by Side on All Devices) -->
-                <div class="grid grid-cols-2 gap-3 sm:gap-5">
+                <!-- Phone & Birthday (Side by Side) -->
+                <div class="grid grid-cols-2 gap-3 sm:gap-4">
                     <!-- Phone Number -->
                     <div>
-                        <label for="phone" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-1.5">
+                        <label for="phone" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5">
                             رقم الهاتف <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
-                            <span class="absolute inset-y-0 right-0 flex items-center pr-2.5 sm:pr-3.5 pointer-events-none text-gray-400 text-xs sm:text-sm">
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400 text-sm sm:text-base">
                                 <i class="fa-solid fa-phone"></i>
                             </span>
                             <input 
@@ -221,19 +223,19 @@
                                 dir="ltr"
                                 inputmode="numeric"
                                 pattern="[0-9]*"
-                                class="input-field w-full pr-8 sm:pr-10 pl-2.5 sm:pl-4 py-2.5 sm:py-3 rounded-xl bg-gray-50 text-gray-800 text-xs sm:text-sm font-medium text-right"
+                                class="input-field w-full pr-9 pl-3 py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold text-right"
                             >
                         </div>
-                        <p class="text-[11px] sm:text-xs text-red-500 mt-1 hidden" id="phoneError">رقم هاتف غير صحيح</p>
+                        <p class="text-[11px] text-red-500 mt-1 hidden" id="phoneError">رقم هاتف غير صحيح</p>
                     </div>
 
                     <!-- Birthday DD/MM/YYYY -->
                     <div>
-                        <label for="birthday" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-1.5 truncate">
+                        <label for="birthday" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5 truncate">
                             تاريخ الميلاد <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
-                            <span class="absolute inset-y-0 right-0 flex items-center pr-2.5 sm:pr-3.5 pointer-events-none text-gray-400 text-xs sm:text-sm">
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400 text-sm sm:text-base">
                                 <i class="fa-solid fa-cake-candles"></i>
                             </span>
                             <input 
@@ -243,79 +245,98 @@
                                 required
                                 readonly
                                 value="31/01/2000"
-                                class="input-field w-full pr-8 sm:pr-10 pl-2.5 sm:pl-4 py-2.5 sm:py-3 rounded-xl bg-gray-50 text-gray-800 text-xs sm:text-sm font-medium cursor-pointer text-center select-none"
+                                class="input-field w-full pr-9 pl-2 py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-bold cursor-pointer text-center select-none"
                             >
                         </div>
-                        <p class="text-[11px] sm:text-xs text-red-500 mt-1 hidden" id="birthdayError">يرجى اختيار تاريخ الميلاد</p>
+                        <p class="text-[11px] text-red-500 mt-1 hidden" id="birthdayError">اختر تاريخ الميلاد</p>
                     </div>
                 </div>
 
+                <!-- Notes Field -->
                 <div>
-                    <label for="notes" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 sm:mb-1.5">
+                    <label for="notes" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5">
                         ملاحظات <span class="text-xs font-normal text-gray-400">(اختياري)</span>
                     </label>
                     <div class="relative">
-                        <span class="absolute top-3.5 right-3.5 pointer-events-none text-gray-400 text-xs sm:text-sm">
+                        <span class="absolute top-3.5 right-3.5 pointer-events-none text-gray-400 text-sm sm:text-base">
                             <i class="fa-solid fa-comment-dots"></i>
                         </span>
                         <textarea 
                             id="notes" 
                             name="notes" 
                             rows="3" 
-                            class="input-field w-full pr-8 sm:pr-10 pl-2.5 sm:pl-4 py-2.5 sm:py-3 rounded-xl bg-gray-50 text-gray-800 text-xs sm:text-sm font-medium resize-none"
+                            class="input-field w-full pr-9 pl-3 py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold resize-none"
                         ></textarea>
                     </div>
                 </div>
 
                 <!-- Submit Button -->
-                <div class="pt-2 sm:pt-3">
+                <div class="pt-2 sm:pt-4">
                     <button 
                         type="submit" 
                         id="submitBtn"
-                        class="btn-salesian w-full py-3 sm:py-3.5 px-6 rounded-xl text-white font-bold text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer"
+                        class="btn-salesian w-full py-3.5 sm:py-4 px-6 rounded-2xl text-white font-extrabold text-base flex items-center justify-center gap-3 cursor-pointer"
                     >
-                        <span>إرسال</span>
-                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                        <span>إرسال البيانات</span>
+                        <i class="fa-solid fa-paper-plane text-sm"></i>
                     </button>
                 </div>
 
             </form>
         </main>
-    </div>
 
-    <div id="successModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full text-center form-card modal-enter">
-            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
+        <!-- Dedicated Success Page View (Shown after successful submission) -->
+        <section id="successSection" class="form-card rounded-3xl p-6 sm:p-10 text-center hidden fade-in">
+            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-5 text-3xl shadow-lg shadow-emerald-50 border-4 border-white">
                 <i class="fa-solid fa-check"></i>
             </div>
-            <h3 class="text-xl font-extrabold text-gray-800 mb-2">تم إرسال البيانات بنجاح!</h3>
-            <p class="text-xs text-gray-600 mb-6">شكراً لتسجيلك، تم حفظ بياناتك بنجاح.</p>
+            
+            <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">تم الإرسال بنجاح!</h2>
+            <p class="text-sm sm:text-base font-bold text-gray-600 mb-6 leading-relaxed">
+                شكراً لتسجيلك في <span class="text-[#0259e6]">شبيبة يسوع الشاب - الناصرة</span>.<br>
+                تم حفظ بياناتك بنجاح وسنتواصل معك قريباً.
+            </p>
+
+            <div class="bg-blue-50/60 border border-blue-100 rounded-2xl p-4 mb-6 text-right space-y-2 text-xs sm:text-sm">
+                <div class="flex justify-between items-center text-gray-600">
+                    <span class="font-bold">الاسم:</span>
+                    <span id="summaryName" class="font-extrabold text-gray-900"></span>
+                </div>
+                <div class="flex justify-between items-center text-gray-600">
+                    <span class="font-bold">رقم الهاتف:</span>
+                    <span id="summaryPhone" class="font-extrabold text-gray-900" dir="ltr"></span>
+                </div>
+            </div>
 
             <button 
-                id="closeSuccessBtn"
-                class="btn-salesian w-full py-3 rounded-xl text-white font-bold text-sm"
+                id="resetFormBtn"
+                class="btn-salesian w-full py-3.5 rounded-2xl text-white font-extrabold text-sm sm:text-base flex items-center justify-center gap-2"
             >
-                إغلاق
+                <i class="fa-solid fa-user-plus text-sm"></i>
+                <span>تسجيل شخص آخر</span>
             </button>
-        </div>
+        </section>
+
     </div>
 
-    <div id="datePickerModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
-        <div class="bg-white rounded-t-3xl sm:rounded-3xl p-5 sm:p-6 max-w-sm w-full form-card modal-enter">
-            <div class="flex items-center justify-between border-b pb-3 mb-4">
-                <span class="text-xs font-bold text-gray-400">تحديد تاريخ الميلاد</span>
-                <span id="selectedDateDisplay" class="text-sm font-extrabold text-[#0259e6]" dir="ltr">31 / 01 / 2000</span>
+    <!-- Centered Date Picker Modal -->
+    <div id="datePickerModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden fade-in">
+        <div class="bg-white rounded-3xl p-5 sm:p-6 max-w-sm w-full form-card shadow-2xl">
+            
+            <div class="flex items-center justify-between border-b border-gray-100 pb-3 mb-4">
+                <span class="text-xs font-extrabold text-gray-400">تحديد تاريخ الميلاد</span>
+                <span id="selectedDateDisplay" class="text-base font-black text-[#0259e6] bg-blue-50 px-3 py-1 rounded-xl border border-blue-100" dir="ltr">31 / 01 / 2000</span>
             </div>
 
             <!-- Column Titles (Day on Left, Month in Middle, Year on Right) -->
-            <div class="grid grid-cols-3 text-center text-xs font-extrabold text-gray-500 mb-2" dir="ltr">
+            <div class="grid grid-cols-3 text-center text-xs font-black text-gray-500 mb-2" dir="ltr">
                 <div>اليوم (DD)</div>
                 <div>الشهر (MM)</div>
                 <div>السنة (YYYY)</div>
             </div>
 
             <!-- Wheel Picker Container -->
-            <div class="wheel-container h-[180px] my-2">
+            <div class="wheel-container h-[200px] my-2">
                 <div class="wheel-highlight-bar"></div>
                 <div class="grid grid-cols-3 gap-1 h-full relative z-10" dir="ltr">
                     <!-- Day Column (DD) - Left -->
@@ -328,18 +349,18 @@
                 <div class="wheel-mask"></div>
             </div>
 
-            <div class="flex items-center gap-3 mt-5">
+            <div class="flex items-center gap-3 mt-6">
                 <button 
                     type="button" 
                     id="confirmDateBtn"
-                    class="btn-salesian flex-1 py-2.5 sm:py-3 rounded-xl text-white font-bold text-sm"
+                    class="btn-salesian flex-1 py-3 rounded-2xl text-white font-extrabold text-sm"
                 >
                     تأكيد
                 </button>
                 <button 
                     type="button" 
                     id="cancelDateBtn"
-                    class="flex-1 py-2.5 sm:py-3 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-sm"
+                    class="flex-1 py-3 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 font-extrabold text-sm transition-colors"
                 >
                     إلغاء
                 </button>
@@ -348,9 +369,12 @@
     </div>
 
     <script>
+        // Paste your Google Apps Script Web App URL here to receive submissions live in Google Sheets
         const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwLHbi6POBPB9YI3WSJ9RqbH4lSaJFhIvFDCReOK6U6JKUDVhYoBaIMCB3fxH9R3B8i/exec";
 
         document.addEventListener('DOMContentLoaded', () => {
+            const formSection = document.getElementById('formSection');
+            const successSection = document.getElementById('successSection');
             const form = document.getElementById('registrationForm');
             const firstNameInput = document.getElementById('firstName');
             const lastNameInput = document.getElementById('lastName');
@@ -358,8 +382,9 @@
             const birthdayInput = document.getElementById('birthday');
             const notesInput = document.getElementById('notes');
             const submitBtn = document.getElementById('submitBtn');
-            const successModal = document.getElementById('successModal');
-            const closeSuccessBtn = document.getElementById('closeSuccessBtn');
+            const resetFormBtn = document.getElementById('resetFormBtn');
+            const summaryName = document.getElementById('summaryName');
+            const summaryPhone = document.getElementById('summaryPhone');
 
             // Date Picker Modal Elements
             const datePickerModal = document.getElementById('datePickerModal');
@@ -386,7 +411,7 @@
 
                 for (let i = start; i <= end; i++) {
                     const item = document.createElement('div');
-                    item.className = 'wheel-item text-gray-700 text-sm cursor-pointer';
+                    item.className = 'wheel-item text-gray-600 text-base cursor-pointer';
                     const val = formatTwoDigits ? String(i).padStart(2, '0') : String(i);
                     item.textContent = val;
                     item.dataset.value = i;
@@ -409,7 +434,7 @@
                 const items = wheel.querySelectorAll('.wheel-item:not(.pointer-events-none)');
                 items.forEach((item) => {
                     if (parseInt(item.dataset.value, 10) === parseInt(value, 10)) {
-                        const topPos = item.offsetTop - wheel.offsetTop - (180 / 2) + (40 / 2);
+                        const topPos = item.offsetTop - wheel.offsetTop - (200 / 2) + (44 / 2);
                         wheel.scrollTo({ top: topPos, behavior: 'smooth' });
                     }
                 });
@@ -420,13 +445,13 @@
                 wheel.addEventListener('scroll', () => {
                     clearTimeout(scrollTimeout);
                     scrollTimeout = setTimeout(() => {
-                        const centerPos = wheel.scrollTop + (180 / 2);
+                        const centerPos = wheel.scrollTop + (200 / 2);
                         const items = wheel.querySelectorAll('.wheel-item:not(.pointer-events-none)');
                         let closest = null;
                         let minDistance = Infinity;
 
                         items.forEach((item) => {
-                            const itemCenter = item.offsetTop - wheel.offsetTop + 20;
+                            const itemCenter = item.offsetTop - wheel.offsetTop + 22;
                             const dist = Math.abs(centerPos - itemCenter);
                             if (dist < minDistance) {
                                 minDistance = dist;
@@ -435,12 +460,12 @@
                         });
 
                         if (closest) {
-                            items.forEach(i => i.classList.remove('text-[#0259e6]', 'scale-110', 'font-black'));
-                            closest.classList.add('text-[#0259e6]', 'scale-110', 'font-black');
+                            items.forEach(i => i.classList.remove('text-[#0259e6]', 'scale-125', 'font-black'));
+                            closest.classList.add('text-[#0259e6]', 'scale-125', 'font-black');
                             onChange(parseInt(closest.dataset.value, 10));
                             updateDateDisplay();
                         }
-                    }, 60);
+                    }, 50);
                 });
             }
 
@@ -454,7 +479,7 @@
             setupWheelListener(monthWheel, (val) => { currentMonth = val; });
             setupWheelListener(yearWheel, (val) => { currentYear = val; });
 
-            // Open date modal on tap/click
+            // Open date modal on tap
             birthdayInput.addEventListener('click', () => {
                 const parts = birthdayInput.value.split('/');
                 if (parts.length === 3) {
@@ -470,7 +495,7 @@
                     scrollToValue(dayWheel, currentDay);
                     scrollToValue(monthWheel, currentMonth);
                     scrollToValue(yearWheel, currentYear);
-                }, 50);
+                }, 60);
             });
 
             confirmDateBtn.addEventListener('click', () => {
@@ -536,7 +561,7 @@
                 }
 
                 submitBtn.disabled = true;
-                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin ml-2"></i> جاري الإرسال...`;
+                submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال...`;
 
                 const formData = {
                     firstName: firstNameInput.value.trim(),
@@ -547,10 +572,12 @@
                     submittedAt: new Date().toLocaleString('ar-EG')
                 };
 
+                // Save submission locally
                 let submissions = JSON.parse(localStorage.getItem('donbosco_form_submissions') || '[]');
                 submissions.push(formData);
                 localStorage.setItem('donbosco_form_submissions', JSON.stringify(submissions));
 
+                // Send to Google Sheets if Web App URL is configured
                 if (GOOGLE_SHEETS_WEB_APP_URL && GOOGLE_SHEETS_WEB_APP_URL.includes('script.google.com')) {
                     try {
                         await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
@@ -560,20 +587,30 @@
                             body: JSON.stringify(formData)
                         });
                     } catch (err) {
-                        console.log('Submission saved locally:', err);
+                        console.log('Saved locally:', err);
                     }
                 }
 
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = `<span>إرسال</span> <i class="fa-solid fa-paper-plane text-xs"></i>`;
+                submitBtn.innerHTML = `<span>إرسال البيانات</span> <i class="fa-solid fa-paper-plane text-sm"></i>`;
 
-                successModal.classList.remove('hidden');
-                form.reset();
-                birthdayInput.value = "31/01/2000";
+                // Update summary details
+                summaryName.textContent = `${formData.firstName} ${formData.lastName}`;
+                summaryPhone.textContent = formData.phone;
+
+                // Switch views from form to success page
+                formSection.classList.add('hidden');
+                successSection.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            closeSuccessBtn.addEventListener('click', () => {
-                successModal.classList.add('hidden');
+            // Reset form to register another person
+            resetFormBtn.addEventListener('click', () => {
+                form.reset();
+                birthdayInput.value = "31/01/2000";
+                successSection.classList.add('hidden');
+                formSection.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
     </script>
