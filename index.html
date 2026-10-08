@@ -135,37 +135,37 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-3 sm:p-6 md:p-10">
+<body class="min-h-screen flex items-center justify-center p-2.5 sm:p-6 md:p-10">
 
     <div class="w-full max-w-lg mx-auto">
         
         <!-- Registration Form Card View -->
-        <main id="formSection" class="form-card rounded-3xl p-5 sm:p-8 md:p-10 relative overflow-hidden transition-all duration-300">
+        <main id="formSection" class="form-card rounded-3xl p-4 sm:p-8 md:p-10 relative overflow-hidden transition-all duration-300">
             
             <!-- Branding Header -->
-            <div class="flex items-center justify-between pb-5 mb-6 border-b border-gray-100">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white border border-gray-100 flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden p-1">
+            <div class="flex items-center justify-between pb-3 mb-3.5 sm:pb-5 sm:mb-6 border-b border-gray-100">
+                <div class="flex items-center gap-2.5 sm:gap-3">
+                    <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-white border border-gray-100 flex items-center justify-center flex-shrink-0 shadow-sm overflow-hidden p-1">
                         <img src="logo.png" alt="Don Bosco Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://placehold.co/120x120/d92323/ffffff?text=DB';">
                     </div>
                     <div>
-                        <span class="text-[10px] sm:text-[11px] font-extrabold tracking-wider text-[#d92323] uppercase block">SALESIANI DON BOSCO</span>
-                        <h1 class="text-base sm:text-xl font-extrabold text-[#0259e6] leading-tight">شبيبة يسوع الشاب - الناصرة</h1>
+                        <span class="text-[9px] sm:text-[11px] font-extrabold tracking-wider text-[#d92323] uppercase block">SALESIANI DON BOSCO</span>
+                        <h1 class="text-sm sm:text-xl font-extrabold text-[#0259e6] leading-tight">شبيبة يسوع الشاب - الناصرة</h1>
                     </div>
                 </div>
                 
-                <span class="text-xs bg-blue-50 text-[#0259e6] font-bold px-3 py-1.5 rounded-full border border-blue-100 flex-shrink-0">
+                <span class="text-[11px] sm:text-xs bg-blue-50 text-[#0259e6] font-bold px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full border border-blue-100 flex-shrink-0">
                     استمارة تسجيل
                 </span>
             </div>
 
-            <form id="registrationForm" class="space-y-4 sm:space-y-5" novalidate>
+            <form id="registrationForm" class="space-y-2.5 sm:space-y-5" novalidate>
                 
                 <!-- First Name & Last Name (Stacked on Mobile, Side by Side on Tablet/Desktop) -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
                     <!-- First Name -->
                     <div>
-                        <label for="firstName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5">
+                        <label for="firstName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1">
                             الاسم الأول <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
@@ -177,15 +177,15 @@
                                 id="firstName" 
                                 name="firstName" 
                                 required
-                                class="input-field w-full pr-9 pl-3 py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold"
+                                class="input-field w-full pr-9 pl-3 py-2.5 sm:py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold"
                             >
                         </div>
-                        <p class="text-[11px] text-red-500 mt-1 hidden" id="firstNameError">يرجى إدخال الاسم الأول</p>
+                        <p class="text-[11px] text-red-500 mt-0.5 hidden" id="firstNameError">يرجى إدخال الاسم الأول</p>
                     </div>
 
                     <!-- Last Name -->
                     <div>
-                        <label for="lastName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5">
+                        <label for="lastName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1">
                             اسم العائلة <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
@@ -197,18 +197,18 @@
                                 id="lastName" 
                                 name="lastName" 
                                 required
-                                class="input-field w-full pr-9 pl-3 py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold"
+                                class="input-field w-full pr-9 pl-3 py-2.5 sm:py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold"
                             >
                         </div>
-                        <p class="text-[11px] text-red-500 mt-1 hidden" id="lastNameError">يرجى إدخال اسم العائلة</p>
+                        <p class="text-[11px] text-red-500 mt-0.5 hidden" id="lastNameError">يرجى إدخال اسم العائلة</p>
                     </div>
                 </div>
 
                 <!-- Phone & Birthday (Stacked on Mobile, Side by Side on Tablet/Desktop) -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
                     <!-- Phone Number -->
                     <div>
-                        <label for="phone" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5">
+                        <label for="phone" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1">
                             رقم الهاتف <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
@@ -223,15 +223,15 @@
                                 dir="ltr"
                                 inputmode="numeric"
                                 pattern="[0-9]*"
-                                class="input-field w-full pr-9 pl-3 py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold text-right"
+                                class="input-field w-full pr-9 pl-3 py-2.5 sm:py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold text-right"
                             >
                         </div>
-                        <p class="text-[11px] text-red-500 mt-1 hidden" id="phoneError">رقم هاتف غير صحيح</p>
+                        <p class="text-[11px] text-red-500 mt-0.5 hidden" id="phoneError">رقم هاتف غير صحيح</p>
                     </div>
 
                     <!-- Birthday DD/MM/YYYY -->
                     <div>
-                        <label for="birthday" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5 truncate">
+                        <label for="birthday" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 truncate">
                             تاريخ الميلاد <span class="text-red-500">*</span>
                         </label>
                         <div class="relative">
@@ -245,37 +245,37 @@
                                 required
                                 readonly
                                 value="31/01/2000"
-                                class="input-field w-full pr-9 pl-2 py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-bold cursor-pointer text-center select-none"
+                                class="input-field w-full pr-9 pl-2 py-2.5 sm:py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-bold cursor-pointer text-center select-none"
                             >
                         </div>
-                        <p class="text-[11px] text-red-500 mt-1 hidden" id="birthdayError">اختر تاريخ الميلاد</p>
+                        <p class="text-[11px] text-red-500 mt-0.5 hidden" id="birthdayError">اختر تاريخ الميلاد</p>
                     </div>
                 </div>
 
                 <!-- Notes Field -->
                 <div>
-                    <label for="notes" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1.5">
+                    <label for="notes" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1">
                         ملاحظات <span class="text-xs font-normal text-gray-400">(اختياري)</span>
                     </label>
                     <div class="relative">
-                        <span class="absolute top-3.5 right-3.5 pointer-events-none text-gray-400 text-sm sm:text-base">
+                        <span class="absolute top-3 right-3.5 pointer-events-none text-gray-400 text-sm sm:text-base">
                             <i class="fa-solid fa-comment-dots"></i>
                         </span>
                         <textarea 
                             id="notes" 
                             name="notes" 
-                            rows="3" 
-                            class="input-field w-full pr-9 pl-3 py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold resize-none"
+                            rows="2" 
+                            class="input-field w-full pr-9 pl-3 py-2.5 sm:py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold resize-none"
                         ></textarea>
                     </div>
                 </div>
 
                 <!-- Submit Button -->
-                <div class="pt-2 sm:pt-4">
+                <div class="pt-1 sm:pt-4">
                     <button 
                         type="submit" 
                         id="submitBtn"
-                        class="btn-salesian w-full py-3.5 sm:py-4 px-6 rounded-2xl text-white font-extrabold text-base flex items-center justify-center gap-3 cursor-pointer"
+                        class="btn-salesian w-full py-3 sm:py-4 px-6 rounded-2xl text-white font-extrabold text-sm sm:text-base flex items-center justify-center gap-3 cursor-pointer"
                     >
                         <span>إرسال البيانات</span>
                         <i class="fa-solid fa-paper-plane text-sm"></i>
@@ -286,7 +286,7 @@
         </main>
 
         <!-- Dedicated Success Page View (Shown after successful submission) -->
-        <section id="successSection" class="form-card rounded-3xl p-6 sm:p-10 text-center hidden fade-in">
+        <section id="successSection" class="form-card rounded-3xl p-5 sm:p-10 text-center hidden fade-in">
             <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-5 text-3xl shadow-lg shadow-emerald-50 border-4 border-white">
                 <i class="fa-solid fa-check"></i>
             </div>
