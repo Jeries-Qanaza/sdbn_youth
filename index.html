@@ -135,7 +135,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-2.5 sm:p-6 md:p-10">
+<body class="min-h-screen flex items-start sm:items-center justify-center p-2 sm:p-6 md:p-10 pt-2 sm:pt-6">
 
     <div class="w-full max-w-lg mx-auto">
         
@@ -286,27 +286,15 @@
         </main>
 
         <!-- Dedicated Success Page View (Shown after successful submission) -->
-        <section id="successSection" class="form-card rounded-3xl p-5 sm:p-10 text-center hidden fade-in">
-            <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-5 text-3xl shadow-lg shadow-emerald-50 border-4 border-white">
+        <section id="successSection" class="form-card rounded-3xl p-6 sm:p-10 text-center hidden fade-in">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl sm:text-3xl shadow-lg shadow-emerald-50 border-4 border-white">
                 <i class="fa-solid fa-check"></i>
             </div>
             
             <h2 class="text-2xl sm:text-3xl font-black text-gray-900 mb-2">تم الإرسال بنجاح!</h2>
             <p class="text-sm sm:text-base font-bold text-gray-600 mb-6 leading-relaxed">
-                شكراً لتسجيلك في <span class="text-[#0259e6]">شبيبة يسوع الشاب - الناصرة</span>.<br>
-                تم حفظ بياناتك بنجاح وسنتواصل معك قريباً.
+                شكراً لتسجيلك في <span class="text-[#0259e6]">شبيبة يسوع الشاب - الناصرة</span>.
             </p>
-
-            <div class="bg-blue-50/60 border border-blue-100 rounded-2xl p-4 mb-6 text-right space-y-2 text-xs sm:text-sm">
-                <div class="flex justify-between items-center text-gray-600">
-                    <span class="font-bold">الاسم:</span>
-                    <span id="summaryName" class="font-extrabold text-gray-900"></span>
-                </div>
-                <div class="flex justify-between items-center text-gray-600">
-                    <span class="font-bold">رقم الهاتف:</span>
-                    <span id="summaryPhone" class="font-extrabold text-gray-900" dir="ltr"></span>
-                </div>
-            </div>
 
             <button 
                 id="resetFormBtn"
@@ -383,8 +371,6 @@
             const notesInput = document.getElementById('notes');
             const submitBtn = document.getElementById('submitBtn');
             const resetFormBtn = document.getElementById('resetFormBtn');
-            const summaryName = document.getElementById('summaryName');
-            const summaryPhone = document.getElementById('summaryPhone');
 
             // Date Picker Modal Elements
             const datePickerModal = document.getElementById('datePickerModal');
@@ -593,10 +579,6 @@
 
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = `<span>إرسال البيانات</span> <i class="fa-solid fa-paper-plane text-sm"></i>`;
-
-                // Update summary details
-                summaryName.textContent = `${formData.firstName} ${formData.lastName}`;
-                summaryPhone.textContent = formData.phone;
 
                 // Switch views from form to success page
                 formSection.classList.add('hidden');
