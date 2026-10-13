@@ -159,11 +159,10 @@
                 </span>
             </div>
 
-            <form id="registrationForm" class="space-y-2.5 sm:space-y-5" novalidate>
+            <form id="registrationForm" class="space-y-2.5 sm:space-y-4" novalidate>
                 
-                <!-- First Name & Last Name (Stacked on Mobile, Side by Side on Tablet/Desktop) -->
+                <!-- First Name & Last Name -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
-                    <!-- First Name -->
                     <div>
                         <label for="firstName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1">
                             الاسم الأول <span class="text-red-500">*</span>
@@ -183,7 +182,6 @@
                         <p class="text-[11px] text-red-500 mt-0.5 hidden" id="firstNameError">يرجى إدخال الاسم الأول</p>
                     </div>
 
-                    <!-- Last Name -->
                     <div>
                         <label for="lastName" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1">
                             اسم العائلة <span class="text-red-500">*</span>
@@ -204,9 +202,8 @@
                     </div>
                 </div>
 
-                <!-- Phone & Birthday (Stacked on Mobile, Side by Side on Tablet/Desktop) -->
+                <!-- Phone & Birthday -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
-                    <!-- Phone Number -->
                     <div>
                         <label for="phone" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1">
                             رقم الهاتف <span class="text-red-500">*</span>
@@ -229,7 +226,6 @@
                         <p class="text-[11px] text-red-500 mt-0.5 hidden" id="phoneError">رقم هاتف غير صحيح</p>
                     </div>
 
-                    <!-- Birthday DD/MM/YYYY -->
                     <div>
                         <label for="birthday" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1 truncate">
                             تاريخ الميلاد <span class="text-red-500">*</span>
@@ -252,6 +248,45 @@
                     </div>
                 </div>
 
+                <!-- Job & Hobbies (New Fields Side by Side) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-4">
+                    <!-- Job Field -->
+                    <div>
+                        <label for="job" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1">
+                            المهنة / العمل <span class="text-xs font-normal text-gray-400">(اختياري)</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400 text-sm sm:text-base">
+                                <i class="fa-solid fa-briefcase"></i>
+                            </span>
+                            <input 
+                                type="text" 
+                                id="job" 
+                                name="job" 
+                                class="input-field w-full pr-9 pl-3 py-2.5 sm:py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Hobbies Field -->
+                    <div>
+                        <label for="hobbies" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1">
+                            الهوايات <span class="text-xs font-normal text-gray-400">(اختياري)</span>
+                        </label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400 text-sm sm:text-base">
+                                <i class="fa-solid fa-palette"></i>
+                            </span>
+                            <input 
+                                type="text" 
+                                id="hobbies" 
+                                name="hobbies" 
+                                class="input-field w-full pr-9 pl-3 py-2.5 sm:py-3 rounded-2xl bg-gray-50 text-gray-800 text-sm font-semibold"
+                            >
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Notes Field -->
                 <div>
                     <label for="notes" class="block text-xs sm:text-sm font-bold text-gray-700 mb-1">
@@ -271,7 +306,7 @@
                 </div>
 
                 <!-- Submit Button -->
-                <div class="pt-1 sm:pt-4">
+                <div class="pt-1 sm:pt-2">
                     <button 
                         type="submit" 
                         id="submitBtn"
@@ -285,7 +320,7 @@
             </form>
         </main>
 
-        <!-- Dedicated Success Page View (Shown after successful submission) -->
+        <!-- Dedicated Success Page View -->
         <section id="successSection" class="form-card rounded-3xl p-6 sm:p-10 text-center hidden fade-in">
             <div class="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl sm:text-3xl shadow-lg shadow-emerald-50 border-4 border-white">
                 <i class="fa-solid fa-check"></i>
@@ -307,7 +342,7 @@
 
     </div>
 
-    <!-- Centered Date Picker Modal (Fixed Full-Screen Overlay & Centered Dialog) -->
+    <!-- Centered Date Picker Modal -->
     <div id="datePickerModal" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden fade-in">
         <div class="bg-white rounded-3xl p-5 sm:p-6 max-w-sm w-full form-card shadow-2xl my-auto mx-auto relative">
             
@@ -316,7 +351,7 @@
                 <span id="selectedDateDisplay" class="text-base font-black text-[#0259e6] bg-blue-50 px-3 py-1 rounded-xl border border-blue-100" dir="ltr">31 / 01 / 2000</span>
             </div>
 
-            <!-- Column Titles (Day on Left, Month in Middle, Year on Right) -->
+            <!-- Column Titles -->
             <div class="grid grid-cols-3 text-center text-xs font-black text-gray-500 mb-2" dir="ltr">
                 <div>اليوم (DD)</div>
                 <div>الشهر (MM)</div>
@@ -327,11 +362,8 @@
             <div class="wheel-container h-[200px] my-2">
                 <div class="wheel-highlight-bar"></div>
                 <div class="grid grid-cols-3 gap-1 h-full relative z-10" dir="ltr">
-                    <!-- Day Column (DD) - Left -->
                     <div class="wheel-column" id="dayWheel"></div>
-                    <!-- Month Column (MM) - Middle -->
                     <div class="wheel-column" id="monthWheel"></div>
-                    <!-- Year Column (YYYY) - Right -->
                     <div class="wheel-column" id="yearWheel"></div>
                 </div>
                 <div class="wheel-mask"></div>
@@ -357,8 +389,7 @@
     </div>
 
     <script>
-        // Paste your Google Apps Script Web App URL here to receive submissions live in Google Sheets
-        const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwLHbi6POBPB9YI3WSJ9RqbH4lSaJFhIvFDCReOK6U6JKUDVhYoBaIMCB3fxH9R3B8i/exec";
+        const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwUO9n87ab3oeZQu7Cw6ROxBu9LsrcGDWaUdZG2bDv19aMjuZq8P0J5fPuKvRjwVE_G/exec";
 
         document.addEventListener('DOMContentLoaded', () => {
             const formSection = document.getElementById('formSection');
@@ -368,6 +399,8 @@
             const lastNameInput = document.getElementById('lastName');
             const phoneInput = document.getElementById('phone');
             const birthdayInput = document.getElementById('birthday');
+            const jobInput = document.getElementById('job');
+            const hobbiesInput = document.getElementById('hobbies');
             const notesInput = document.getElementById('notes');
             const submitBtn = document.getElementById('submitBtn');
             const resetFormBtn = document.getElementById('resetFormBtn');
@@ -388,7 +421,6 @@
             function populateWheel(element, start, end, formatTwoDigits = true) {
                 element.innerHTML = '';
                 
-                // Add top padding items
                 for (let i = 0; i < 2; i++) {
                     const pad = document.createElement('div');
                     pad.className = 'wheel-item opacity-0 pointer-events-none';
@@ -404,7 +436,6 @@
                     element.appendChild(item);
                 }
 
-                // Add bottom padding items
                 for (let i = 0; i < 2; i++) {
                     const pad = document.createElement('div');
                     pad.className = 'wheel-item opacity-0 pointer-events-none';
@@ -465,7 +496,6 @@
             setupWheelListener(monthWheel, (val) => { currentMonth = val; });
             setupWheelListener(yearWheel, (val) => { currentYear = val; });
 
-            // Open date modal on tap
             birthdayInput.addEventListener('click', () => {
                 const parts = birthdayInput.value.split('/');
                 if (parts.length === 3) {
@@ -554,16 +584,16 @@
                     lastName: lastNameInput.value.trim(),
                     phone: phoneInput.value.trim(),
                     birthday: birthdayInput.value.trim(),
+                    job: jobInput.value.trim() || 'لا يوجد',
+                    hobbies: hobbiesInput.value.trim() || 'لا يوجد',
                     notes: notesInput.value.trim() || 'لا يوجد',
                     submittedAt: new Date().toLocaleString('ar-EG')
                 };
 
-                // Save submission locally
                 let submissions = JSON.parse(localStorage.getItem('donbosco_form_submissions') || '[]');
                 submissions.push(formData);
                 localStorage.setItem('donbosco_form_submissions', JSON.stringify(submissions));
 
-                // Send to Google Sheets if Web App URL is configured
                 if (GOOGLE_SHEETS_WEB_APP_URL && GOOGLE_SHEETS_WEB_APP_URL.includes('script.google.com')) {
                     try {
                         await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
@@ -580,13 +610,11 @@
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = `<span>إرسال البيانات</span> <i class="fa-solid fa-paper-plane text-sm"></i>`;
 
-                // Switch views from form to success page
                 formSection.classList.add('hidden');
                 successSection.classList.remove('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
 
-            // Reset form to register another person
             resetFormBtn.addEventListener('click', () => {
                 form.reset();
                 birthdayInput.value = "31/01/2000";
